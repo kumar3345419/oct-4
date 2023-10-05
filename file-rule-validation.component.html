@@ -1,0 +1,60 @@
+
+
+<br>
+<br>
+
+<button (click)="addNewField()">Add New Button</button>
+
+
+
+<div class="row" *ngFor="let d of ruleSetData.RuleSet">
+  <div class="col-md-3">
+    <Label>{{d.name}}</Label>
+  </div>
+  <div class="col-md-3">
+    <select [(ngModel)]="selectedAction">
+      <option [value]="action" *ngFor="let action of actions">{{action}}</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <Label *ngIf="d.match?.regex != undefined">{{d.match.regex}}</Label>
+    <ng-container *ngIf="d.match?.gt != undefined && d.match?.lt != undefined">
+      <Label>GT:</Label>
+      <input type="text" [value]="d.match.gt" id="">
+      <Label>LT:</Label>
+      <input type="text" [value]="d.match.lt" id="">
+    </ng-container>
+    <Label *ngIf="d.match?.regex == undefined && d.match?.gt == undefined && d.match?.lt == undefined"> {{d.match}}</Label>
+  
+  </div>
+</div>
+
+<br>
+<br>
+<ng-container *ngFor="let dynamicrow of dynamicRows">
+  <div class="col-md-3">
+      <select [(ngModel)]="selectedName">
+        <option [value]="n" *ngFor="let n of names">{{n}}</option>
+      </select>
+  </div>
+  
+  <div class="col-md-3">
+      <select [(ngModel)]="selectedAction">
+        <option [value]="action" *ngFor="let action of actions">{{action}}</option>
+      </select>
+  </div>
+  <!-- <div class="col-md-3">
+    <ng-container *ngFor="let d of ruleSetData.RuleSet">
+      <ng-container *ngIf="d.name == selectedName">
+        <Label *ngIf="d.match?.regex != undefined">{{d.match.regex}}</Label>
+        <ng-container *ngIf="d.match?.gt != undefined && d.match?.lt != undefined">
+          <Label>GT:</Label>
+          <input type="text" [value]="d.match.gt" id="">
+          <Label>LT:</Label>
+          <input type="text" [value]="d.match.lt" id="">
+        </ng-container>
+        <Label *ngIf="d.match?.regex == undefined && d.match?.gt == undefined && d.match?.lt == undefined"> {{d.match}}</Label>
+      </ng-container>
+    </ng-container>
+  </div> -->
+</ng-container>
